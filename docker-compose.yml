@@ -1,0 +1,29 @@
+services:
+  db:
+    build: .
+    container_name: hh_postgres_db
+    environment:
+      - POSTGRES_DB=hh_db
+      - POSTGRES_USER=hh_admin
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  db-test:
+    build: 
+      context: .
+      dockerfile: Dockerfile.no-index 
+    container_name: hh_postgres_db_no_index
+    environment:
+      - POSTGRES_DB=hh_db
+      - POSTGRES_USER=hh_admin
+      - POSTGRES_PASSWORD=admin_pass
+    ports:
+      - "5433:5432"
+
+volumes:
+  pgdata:
+  
