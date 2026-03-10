@@ -1,0 +1,9 @@
+FROM postgres:16-alpine
+
+COPY schema.sql /docker-entrypoint-initdb.d/01_schema.sql
+COPY indexes.sql /docker-entrypoint-initdb.d/03_indexes.sql
+COPY samples_for_indexes.sql /docker-entrypoint-initdb.d/04_samples_for_indexes.sql
+
+COPY get_avgs_for_area.sql /home/get_avgs.sql
+COPY get_top_months.sql /home/get_months.sql
+COPY get_top_vacancies.sql /home/get_vacancies.sql
